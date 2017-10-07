@@ -1,551 +1,87 @@
-{% extends "base.html" %} {% block title %} Results {% endblock %} {% block content %}
-<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/pages/results.css">
-<style>
-    .panel.with-nav-tabs .panel-heading {
-        padding: 5px 5px 0 20px;
-    }
-    
-    .panel.with-nav-tabs .nav-tabs {
-        border-bottom: none;
-    }
-    
-    .panel.with-nav-tabs .nav-justified {
-        margin-bottom: -1px;
-    }
-    /********************************************************************/
-    /*** PANEL DEFAULT ***/
-    
-    .with-nav-tabs.panel-default .nav-tabs>li>a,
-    .with-nav-tabs.panel-default .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-default .nav-tabs>li>a:focus {
-        color: #777;
-    }
-    
-    .with-nav-tabs.panel-default .nav-tabs>.open>a,
-    .with-nav-tabs.panel-default .nav-tabs>.open>a:hover,
-    .with-nav-tabs.panel-default .nav-tabs>.open>a:focus,
-    .with-nav-tabs.panel-default .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-default .nav-tabs>li>a:focus {
-        color: #777;
-        background-color: #ddd;
-        border-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-default .nav-tabs>li.active>a,
-    .with-nav-tabs.panel-default .nav-tabs>li.active>a:hover,
-    .with-nav-tabs.panel-default .nav-tabs>li.active>a:focus {
-        color: #555;
-        background-color: #fff;
-        border-color: #ddd;
-        border-bottom-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu {
-        background-color: #f5f5f5;
-        border-color: #ddd;
-    }
-    
-    .with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>li>a {
-        color: #777;
-    }
-    
-    .with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>li>a:hover,
-    .with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>li>a:focus {
-        background-color: #ddd;
-    }
-    
-    .with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>.active>a,
-    .with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>.active>a:hover,
-    .with-nav-tabs.panel-default .nav-tabs>li.dropdown .dropdown-menu>.active>a:focus {
-        color: #fff;
-        font-weight: bolder;
-        background-color: #555;
-    }
-    /********************************************************************/
-    /*** PANEL PRIMARY ***/
-    
-    .with-nav-tabs.panel-primary .nav-tabs>li>a,
-    .with-nav-tabs.panel-primary .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-primary .nav-tabs>li>a:focus {
-        color: #FCB913;
-    }
-    
-    .with-nav-tabs.panel-primary .nav-tabs>.open>a,
-    .with-nav-tabs.panel-primary .nav-tabs>.open>a:hover,
-    .with-nav-tabs.panel-primary .nav-tabs>.open>a:focus,
-    .with-nav-tabs.panel-primary .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-primary .nav-tabs>li>a:focus {
-        color: #FCB913;
-        background-color: #588ab5;
-        opacity: 0.75;
-        border-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-primary .nav-tabs>li.active>a,
-    .with-nav-tabs.panel-primary .nav-tabs>li.active>a:hover,
-    .with-nav-tabs.panel-primary .nav-tabs>li.active>a:focus {
-        color: #428bca;
-        background-color: #2c2f33;
-        opacity: 1;
-        border-color: #428bca;
-        border-bottom-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-primary .nav-tabs>li.dropdown .dropdown-menu {
-        background-color: #428bca;
-        border-color: #3071a9;
-    }
-    
-    .with-nav-tabs.panel-primary .nav-tabs>li.dropdown .dropdown-menu>li>a {
-        color: #fff;
-    }
-    
-    .with-nav-tabs.panel-primary .nav-tabs>li.dropdown .dropdown-menu>li>a:hover,
-    .with-nav-tabs.panel-primary .nav-tabs>li.dropdown .dropdown-menu>li>a:focus {
-        background-color: #3071a9;
-    }
-    
-    .with-nav-tabs.panel-primary .nav-tabs>li.dropdown .dropdown-menu>.active>a,
-    .with-nav-tabs.panel-primary .nav-tabs>li.dropdown .dropdown-menu>.active>a:hover,
-    .with-nav-tabs.panel-primary .nav-tabs>li.dropdown .dropdown-menu>.active>a:focus {
-        background-color: #4a9fe9;
-    }
-    /********************************************************************/
-    /*** PANEL SUCCESS ***/
-    
-    .with-nav-tabs.panel-success .nav-tabs>li>a,
-    .with-nav-tabs.panel-success .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-success .nav-tabs>li>a:focus {
-        color: #3c763d;
-    }
-    
-    .with-nav-tabs.panel-success .nav-tabs>.open>a,
-    .with-nav-tabs.panel-success .nav-tabs>.open>a:hover,
-    .with-nav-tabs.panel-success .nav-tabs>.open>a:focus,
-    .with-nav-tabs.panel-success .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-success .nav-tabs>li>a:focus {
-        color: #3c763d;
-        background-color: #d6e9c6;
-        border-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-success .nav-tabs>li.active>a,
-    .with-nav-tabs.panel-success .nav-tabs>li.active>a:hover,
-    .with-nav-tabs.panel-success .nav-tabs>li.active>a:focus {
-        color: #3c763d;
-        background-color: #fff;
-        border-color: #d6e9c6;
-        border-bottom-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-success .nav-tabs>li.dropdown .dropdown-menu {
-        background-color: #dff0d8;
-        border-color: #d6e9c6;
-    }
-    
-    .with-nav-tabs.panel-success .nav-tabs>li.dropdown .dropdown-menu>li>a {
-        color: #3c763d;
-    }
-    
-    .with-nav-tabs.panel-success .nav-tabs>li.dropdown .dropdown-menu>li>a:hover,
-    .with-nav-tabs.panel-success .nav-tabs>li.dropdown .dropdown-menu>li>a:focus {
-        background-color: #d6e9c6;
-    }
-    
-    .with-nav-tabs.panel-success .nav-tabs>li.dropdown .dropdown-menu>.active>a,
-    .with-nav-tabs.panel-success .nav-tabs>li.dropdown .dropdown-menu>.active>a:hover,
-    .with-nav-tabs.panel-success .nav-tabs>li.dropdown .dropdown-menu>.active>a:focus {
-        color: #fff;
-        background-color: #3c763d;
-    }
-    /********************************************************************/
-    /*** PANEL INFO ***/
-    
-    .with-nav-tabs.panel-info .nav-tabs>li>a,
-    .with-nav-tabs.panel-info .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-info .nav-tabs>li>a:focus {
-        color: #31708f;
-    }
-    
-    .with-nav-tabs.panel-info .nav-tabs>.open>a,
-    .with-nav-tabs.panel-info .nav-tabs>.open>a:hover,
-    .with-nav-tabs.panel-info .nav-tabs>.open>a:focus,
-    .with-nav-tabs.panel-info .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-info .nav-tabs>li>a:focus {
-        color: #31708f;
-        background-color: #bce8f1;
-        border-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-info .nav-tabs>li.active>a,
-    .with-nav-tabs.panel-info .nav-tabs>li.active>a:hover,
-    .with-nav-tabs.panel-info .nav-tabs>li.active>a:focus {
-        color: #31708f;
-        background-color: #fff;
-        border-color: #bce8f1;
-        border-bottom-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-info .nav-tabs>li.dropdown .dropdown-menu {
-        background-color: #d9edf7;
-        border-color: #bce8f1;
-    }
-    
-    .with-nav-tabs.panel-info .nav-tabs>li.dropdown .dropdown-menu>li>a {
-        color: #31708f;
-    }
-    
-    .with-nav-tabs.panel-info .nav-tabs>li.dropdown .dropdown-menu>li>a:hover,
-    .with-nav-tabs.panel-info .nav-tabs>li.dropdown .dropdown-menu>li>a:focus {
-        background-color: #bce8f1;
-    }
-    
-    .with-nav-tabs.panel-info .nav-tabs>li.dropdown .dropdown-menu>.active>a,
-    .with-nav-tabs.panel-info .nav-tabs>li.dropdown .dropdown-menu>.active>a:hover,
-    .with-nav-tabs.panel-info .nav-tabs>li.dropdown .dropdown-menu>.active>a:focus {
-        color: #fff;
-    }
-    /********************************************************************/
-    /*** PANEL WARNING ***/
-    
-    .with-nav-tabs.panel-warning .nav-tabs>li>a,
-    .with-nav-tabs.panel-warning .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-warning .nav-tabs>li>a:focus {
-        color: #8a6d3b;
-    }
-    
-    .with-nav-tabs.panel-warning .nav-tabs>.open>a,
-    .with-nav-tabs.panel-warning .nav-tabs>.open>a:hover,
-    .with-nav-tabs.panel-warning .nav-tabs>.open>a:focus,
-    .with-nav-tabs.panel-warning .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-warning .nav-tabs>li>a:focus {
-        color: #8a6d3b;
-        background-color: #faebcc;
-        border-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-warning .nav-tabs>li.active>a,
-    .with-nav-tabs.panel-warning .nav-tabs>li.active>a:hover,
-    .with-nav-tabs.panel-warning .nav-tabs>li.active>a:focus {
-        color: #8a6d3b;
-        background-color: #fff;
-        border-color: #faebcc;
-        border-bottom-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-warning .nav-tabs>li.dropdown .dropdown-menu {
-        background-color: #fcf8e3;
-        border-color: #faebcc;
-    }
-    
-    .with-nav-tabs.panel-warning .nav-tabs>li.dropdown .dropdown-menu>li>a {
-        color: #8a6d3b;
-    }
-    
-    .with-nav-tabs.panel-warning .nav-tabs>li.dropdown .dropdown-menu>li>a:hover,
-    .with-nav-tabs.panel-warning .nav-tabs>li.dropdown .dropdown-menu>li>a:focus {
-        background-color: #faebcc;
-    }
-    
-    .with-nav-tabs.panel-warning .nav-tabs>li.dropdown .dropdown-menu>.active>a,
-    .with-nav-tabs.panel-warning .nav-tabs>li.dropdown .dropdown-menu>.active>a:hover,
-    .with-nav-tabs.panel-warning .nav-tabs>li.dropdown .dropdown-menu>.active>a:focus {
-        color: #fff;
-        background-color: #8a6d3b;
-    }
-    /********************************************************************/
-    /*** PANEL DANGER ***/
-    
-    .with-nav-tabs.panel-danger .nav-tabs>li>a,
-    .with-nav-tabs.panel-danger .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-danger .nav-tabs>li>a:focus {
-        color: #a94442;
-    }
-    
-    .with-nav-tabs.panel-danger .nav-tabs>.open>a,
-    .with-nav-tabs.panel-danger .nav-tabs>.open>a:hover,
-    .with-nav-tabs.panel-danger .nav-tabs>.open>a:focus,
-    .with-nav-tabs.panel-danger .nav-tabs>li>a:hover,
-    .with-nav-tabs.panel-danger .nav-tabs>li>a:focus {
-        color: #a94442;
-        background-color: #ebccd1;
-        border-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-danger .nav-tabs>li.active>a,
-    .with-nav-tabs.panel-danger .nav-tabs>li.active>a:hover,
-    .with-nav-tabs.panel-danger .nav-tabs>li.active>a:focus {
-        color: #a94442;
-        background-color: #fff;
-        border-color: #ebccd1;
-        border-bottom-color: transparent;
-    }
-    
-    .with-nav-tabs.panel-danger .nav-tabs>li.dropdown .dropdown-menu {
-        background-color: #f2dede;
-        /* bg color */
-        border-color: #ebccd1;
-        /* border color */
-    }
-    
-    .with-nav-tabs.panel-danger .nav-tabs>li.dropdown .dropdown-menu>li>a {
-        color: #a94442;
-        /* normal text color */
-    }
-    
-    .with-nav-tabs.panel-danger .nav-tabs>li.dropdown .dropdown-menu>li>a:hover,
-    .with-nav-tabs.panel-danger .nav-tabs>li.dropdown .dropdown-menu>li>a:focus {
-        background-color: #ebccd1;
-        /* hover bg color */
-    }
-    
-    .with-nav-tabs.panel-danger .nav-tabs>li.dropdown .dropdown-menu>.active>a,
-    .with-nav-tabs.panel-danger .nav-tabs>li.dropdown .dropdown-menu>.active>a:hover,
-    .with-nav-tabs.panel-danger .nav-tabs>li.dropdown .dropdown-menu>.active>a:focus {
-        color: #fff;
-        /* active text color */
-        background-color: #a94442;
-        /* active bg color */
-    }
-    
-    #myBoardHead>ul>li>a {
-        height: 10vh;
-        width: 22.7vw;
-    }
-    
-    #myBoardBody {
-        background-color: #2c2f33;
-        overflow-y: auto;
-        min-height: 81vh;
-        padding-left: 0px;
-    }
-    
-    #myModal>div>div>div>div>div {
-        margin-bottom: 0px;
-    }
-    
-    .panel-primary>.panel-heading {
-        background-image: -webkit-gradient(linear, left top, left bottom, from(#22384a), to(#357ebd))
-    }
-    
-    .getReport {
-        color: #FCB913;
-        cursor: pointer;
-        text-decoration: underline;
-    }
-    
-    .getReport:hover {
-        color: #616dff;
-        cursor: pointer;
-        text-decoration: underline;
-    }
-    
-    .progD {
-        float: left;
-        margin: 0vw 5vw;
-        height: 7vw;
-        width: 7vw;
-        text-align: center;
-    }
-    
-    circle.na {
-        fill: #333;
-    }
-    
-    circle.zero {
-        fill: #c00;
-    }
-    
-    circle.one {
-        fill: #6c0;
-    }
-    
-    .cTitle {
-        margin: 0px;
-        margin-bottom: 5px;
-        color: #FCB913;
-        font-weight: bolder;
-    }
-    
-    .liquidFillGaugeText {
-        font-family: Helvetica;
-        font-weight: bold;
-    }
-</style>
+<!DOCTYPE html>
+<html lang="">
 
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
 
-<div class="container">
-    <div class="row">
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
-        <div class="col-md-12">
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="assets/css/style.css" rel="stylesheet">
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
 
+<body>
 
-            <div id="progContainer">
-                <div class="progD" id="replicationProg">
-                    <h5 class="cTitle">REPLICATION PROGRESS</h5>
+    <div class="myContainer">
 
-                </div>
+        <div class="navbar">
+            <a class="navbar-brand" href="#">Wells Fargo CMoR</a>
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">results</a>
+                </li>
 
-                <div class="progD" id="bm1Prog">
-                    <h5 class="cTitle">BENCHMARKING I PROGRESS</h5>
+            </ul>
+            <ul class="nav navbar-nav" style='float: right;'>
+                <li class="active">
+                    <a href="#">res</a>
+                </li>
 
-                </div>
-                <div class="progD" id="bm2Prog">
-                    <h5 class="cTitle">BENCHMARKING II PROGRESS</h5>
+            </ul>
 
+        </div>
+        <hr style=' clear: both; color: white' ;>
+
+        <div class="row">
+
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+
+            </div>
+
+            <div class="col-md-8">
+                <div id="progContainer">
+                    <div class="progD2">
+                        <h5 class="cTitle">REPLICATION PROGRESS</h5>
+                        <svg id="fillgauge2" width="115%" height="150" onclick="gauge2.update(NewValue());"></svg>
+                    </div>
+                    <div class="progD2">
+                        <h5 class="cTitle">BENCHMARKING I PROGRESS</h5>
+                        <svg id="fillgauge3" width="115%" height="150" onclick="gauge3.update(NewValue());"></svg>
+
+                    </div>
+                    <div class="progD2">
+                        <h5 class="cTitle">BENCHMARKING II PROGRESS</h5>
+                        <svg id="fillgauge5" width="115%" height="150" onclick="gauge5.update(NewValue());"></svg>
+
+                    </div>
                 </div>
             </div>
-            <script src="http://d3js.org/d3.v3.min.js"></script>
-            <script src="{{ STATIC_URL }}js/pages/fluid.js"></script>
 
-            <svg id="fillgauge2" width="19%" height="200" onclick="gauge2.update(NewValue());"></svg>
-            <svg id="fillgauge3" width="19%" height="200" onclick="gauge3.update(NewValue());"></svg>
-            <svg class='hidden' id="fillgauge4" width="19%" height="200" onclick="gauge4.update(NewValue());"></svg>
-            <svg id="fillgauge5" width="19%" height="200" onclick="gauge5.update(NewValue());"></svg>
-
-            <script language="JavaScript">
-                var config1 = liquidFillGaugeDefaultSettings();
-                // config1.circleColor = "blue";
-                // config1.textColor = "white";
-                // config1.waveTextColor = "#FFAAAA";
-                // config1.waveColor = "#FFDDDD";
-                // config1.circleThickness = 0.1;
-                // config1.circleFillGap = 0.0;
-                // config1.textVertPosition = 0.2;
-
-                var gauge2 = loadLiquidFillGauge("fillgauge2", 6.12, config1);
-                var config2 = liquidFillGaugeDefaultSettings();
-                config2.waveColor = "#a5db48";
-                var gauge3 = loadLiquidFillGauge("fillgauge3", 60.44, config2);
-                var config3 = liquidFillGaugeDefaultSettings();
-                config3.waveColor = "orangered";
-                var gauge5 = loadLiquidFillGauge("fillgauge5", 18.54, config3);
-
-
-                function NewValue() {
-                    if (Math.random() > .5) {
-                        return Math.round(Math.random() * 100);
-                    } else {
-                        return (Math.random() * 100).toFixed(1);
-                    }
-                }
-            </script>
-            <!-- <script>
-                var repTimer;
-                var bm1Timer;
-                var bm2Timer;
-                var kRep = 0.15;
-                var kBm1 = 0.25;
-                var kBm2 = 0.05;
-
-
-                function changeRepBar(k) {
-
-                    d3.select("#replicationProg").call(drawCircularProgressBar, k);
-
-                    if (kRep > 1) {
-                        clearInterval(repTimer);
-                    }
-                }
-
-                function changeBm1Bar(k) {
-                    d3.select("#bm1Prog").call(drawCircularProgressBar, k);
-                }
-
-                function changeBm2Prog(k) {
-                    d3.select("#bm2Prog").call(drawCircularProgressBar, k);
-                }
-
-                repTimer = setInterval(function() {
-                    kRep += 0.01;
-                    if (kRep <= 1) {
-                        changeRepBar(kRep);
-                    } else {
-                        changeRepBar(1)
-                    }
-                }, 100);
-
-
-                d3.select("#replicationProg").call(drawCircularProgressBar, kRep);
-                d3.select("#bm1Prog").call(drawCircularProgressBar, kBm1);
-                d3.select("#bm2Prog").call(drawCircularProgressBar, kBm2);
-
-
-                function fix(k) {
-                    var t0, t1 = k * 2 * Math.PI;
-
-                    // Solve for theta numerically.
-                    if (k > 0 && k < 1) {
-                        t1 = Math.pow(12 * k * Math.PI, 1 / 3);
-                        for (var i = 0; i < 10; ++i) {
-                            t0 = t1;
-                            t1 = (Math.sin(t0) - t0 * Math.cos(t0) + 2 * k * Math.PI) / (1 - Math.cos(t0));
-                        }
-                        k = (1 - Math.cos(t1 / 2)) / 2;
-                    }
-                    return k;
-                }
-
-                function drawCircularProgressBar(selection, k) {
-                    if (selection) {
-                        var r = 240; // radius of the ball
-
-                        var h = 0;
-                        var zero = 0;
-                        var one = 0;
-                        var text = "N/A";
-                        if (k >= 0) {
-                            var fixed = fix(k);
-                            h = r * 2 * (1 - fixed);
-                            zero = 1;
-                            one = k;
-                            text = parseInt(k * 100) + "%";
-                        }
-
-                        selection.selectAll("svg").remove();
-                        selection.append("svg").attr("width", "100%").attr("height", "100%")
-                            .attr("viewBox", "0 0 " + r * 2 + " " + r * 2)
-                            .call(function(e) {
-                                var defs = e.append("defs")
-                                var clip = defs.append("clipPath").attr("id", "clip")
-                                    .append("rect").attr("x", "-" + r).attr("y", "-" + r)
-                                    .attr("width", r * 2).attr("height", h);
-
-                                g = e.append("g").attr("transform", "translate(" + r + "," + r + ")");
-                                g.append("circle").attr("r", r).attr("class", "na");
-                                g.append("circle").attr("r", r).style("fill-opacity", zero).attr("class", "zero");
-                                g.append("circle").attr("r", r).style("fill-opacity", one).attr("class", "one");
-                                g.append("circle").attr("r", r).style("fill", "#333").style("fill-opacity", 0.5).attr(
-                                    "clip-path", "url(#clip)");
-                                g.append("text").attr("class", "value").attr("text-anchor", "middle").attr(
-                                    "font-size", "100").style("fill", "white").style("fill-opacity", .7).text(
-                                    text);
-                            });
-                    }
-                }
-            </script> -->
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            </div>
         </div>
-        <div style='margin-top: 50px;' class="col-md-5">
-            <a style='clear:both; margin-top: 20px;' href="\\mns2nhf503.wellsfargo.com\1MRM_CMRv_QA\data\output">
-                <h3 class="getReport"> Get User Reports
-                    <h5> results available at \\mns2nhf503.wellsfargo.com\1MRM_CMRv_QA\data\output </h5>
-                </h3>
-            </a>
+        <div class="row">
+
+            <div style='margin-top: 50px;' class="col-md-5">
+                <a style='clear:both; margin-top: 20px;' href="\\mns2nhf503.wellsfargo.com\1MRM_CMRv_QA\data\output">
+                    <h3 class="getReport"> Get User Reports
+                        <h5> results available at \\mns2nhf503.wellsfargo.com\1MRM_CMRv_QA\data\output </h5>
+                    </h3>
+                </a>
+            </div>
         </div>
-
-
     </div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<script>
-</script>
-<script src="{{ STATIC_URL }}js/pages/results.js"></script>
+    <script src="assets/js/fluid.js"></script>
+    <script src="assets/js/main.js"></script>
 
-</div>
-{% endblock %}
+</body>
+
+</html>

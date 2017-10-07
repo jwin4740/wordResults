@@ -1,0 +1,75 @@
+* {
+    box-sizing: border-box;
+    color: white;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: white;
+}
+
+body {
+    background-color: black;
+}
+
+.myContainer{
+    margin: 0px 25px 0px 25px;
+}
+
+.getReport {
+    color: #FCB913;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.getReport:hover {
+    color: #616dff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.progD2 {
+    float: left;
+    margin: 0vw 5vw;
+    height: 7vw;
+    width: 7vw;
+    text-align: center;
+}
+
+.cTitle{
+    margin: 0px;
+}
+
+circle.na {
+    fill: #333;
+}
+
+circle.zero {
+    fill: #c00;
+}
+
+circle.one {
+    fill: #6c0;
+}
+
+.cTitle {
+    margin: 0px;
+    margin-bottom: 5px;
+    color: #FCB913;
+    font-weight: bolder;
+}
+
+.liquidFillGaugeText {
+    font-family: Helvetica;
+    font-weight: bold;
+}
