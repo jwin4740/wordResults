@@ -80,17 +80,7 @@ h6 {
     margin: 0px;
 }
 
-circle.na {
-    fill: #333;
-}
 
-circle.zero {
-    fill: #c00;
-}
-
-circle.one {
-    fill: #6c0;
-}
 
 .cTitle {
     margin: 0px;
@@ -104,6 +94,7 @@ circle.one {
     font-weight: bold;
 }
 
-svg g path {
-    transition: all 10s ease;
+
+#progContainer{
+    text-align: center;
 }
