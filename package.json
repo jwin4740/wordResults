@@ -1,0 +1,26 @@
+{
+  "name": "word",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jwin4740/wordResults.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jwin4740/wordResults/issues"
+  },
+  "homepage": "https://github.com/jwin4740/wordResults#readme",
+  "dependencies": {
+    "mysql2": "^1.4.2",
+    "node-rest-client": "^3.1.0",
+    "pg": "^7.3.0",
+    "sequelize": "^4.13.5",
+    "tedious": "^2.0.0"
+  }
+}

@@ -1,19 +1,3 @@
-var config1 = liquidFillGaugeDefaultSettings();
-// config1.circleColor = "blue";
-// config1.textColor = "white";
-// config1.waveTextColor = "#FFAAAA";
-// config1.waveColor = "#FFDDDD";
-// config1.circleThickness = 0.1;
-// config1.circleFillGap = 0.0;
-// config1.textVertPosition = 0.2;
-
-var gauge2 = loadLiquidFillGauge("fillgauge2", 6.12, config1);
-var config2 = liquidFillGaugeDefaultSettings();
-config2.waveColor = "#a5db48";
-var gauge3 = loadLiquidFillGauge("fillgauge3", 60.44, config2);
-var config3 = liquidFillGaugeDefaultSettings();
-config3.waveColor = "orangered";
-var gauge5 = loadLiquidFillGauge("fillgauge5", 18.54, config3);
 
 
 function NewValue() {

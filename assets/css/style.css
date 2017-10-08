@@ -3,6 +3,39 @@
     color: white;
 }
 
+body {
+    background-color: #222;
+}
+
+#base-nav.navbar-fixed-top {
+    background-color: #404040;
+    border-color: #404040;
+}
+
+#navbar > ul > li > a,
+#navbar > ul > li > span {
+    color: #e7e7e7;
+}
+
+#navbar > ul > li.active > a {
+    color: #404040;
+}
+
+
+.navbar-brand {
+    padding: 0;
+}
+
+.navbar-brand > img {
+    width: 49%;
+}
+
+.content-container {
+    margin-top: 100px;
+}
+
+
+
 .h1,
 .h2,
 .h3,
@@ -18,9 +51,6 @@ h6 {
     color: white;
 }
 
-body {
-    background-color: black;
-}
 
 .myContainer{
     margin: 0px 25px 0px 25px;
@@ -72,4 +102,8 @@ circle.one {
 .liquidFillGaugeText {
     font-family: Helvetica;
     font-weight: bold;
+}
+
+svg g path {
+    transition: all 10s ease;
 }
